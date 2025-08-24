@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Edit Blog{% endblock %}
+{% block content %}
+<h2>Edit Blog</h2>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.title.label }} {{ form.title }}
+    {{ form.content.label }} {{ form.content }}
+    {{ form.category.label }} {{ form.category(placeholder="Enter a category") }}
+    {{ form.submit }}
+</form>
+{% endblock %}

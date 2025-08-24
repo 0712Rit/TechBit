@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="hero">
+    <h1>TechBit: Unleash Your Tech Thoughts</h1>
+    <p>Explore, create, and share innovative ideas with our vibrant community!</p>
+</div>
+<form method="GET">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search blogs...">
+    <input type="submit" value="Search">
+</form>
+{% for blog in blogs.items %}
+    <div class="blog-card">
+        <h3><a href="{{ url_for('blog_view', blog_id=blog.id) }}">{{ blog.title }}</a></h3>
+        {% if blog.category %}<span class="category-badge">{{ blog.category.name }}</span>{% endif %}
+        <p>{{ blog.content|markdown|truncate(200, True) }}</p>
+    </div>
+{% endfor %}
+<div>
+    {% if blogs.has_prev %}
+        <a href="{{ url_for('home', page=blogs.prev_num, q=query) }}">Previous</a>
+    {% endif %}
+    {% if blogs.has_next %}
+        <a href="{{ url_for('home', page=blogs.next_num, q=query) }}">Next</a>
+    {% endif %}
+</div>
+{% endblock %}

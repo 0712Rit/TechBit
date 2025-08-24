@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}{{ blog.title }}{% endblock %}
+{% block content %}
+<div class="blog-card">
+    <h2>{{ blog.title }}</h2>
+    {% if blog.category %}<span class="category-badge">{{ blog.category.name }}</span>{% endif %}
+    <p>By <a href="{{ url_for('profile', username=blog.author.username) }}">{{ blog.author.username }}</a></p>
+    <div>{{ blog.content|markdown }}</div>
+</div>
+<h3>Comments</h3>
+{% for comment in blog.comments %}
+    <div class="blog-card">
+        <p>{{ comment.content|markdown }}</p>
+        <p>By <a href="{{ url_for('profile', username=comment.author.username) }}">{{ comment.author.username }}</a></p>
+    </div>
+{% else %}
+    <p>No comments yet.</p>
+{% endfor %}
+{% if session.get('user_id') %}
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.content.label }} {{ form.content }}
+        {{ form.submit }}
+    </form>
+{% else %}
+    <p><a href="{{ url_for('login') }}">Login</a> to comment.</p>
+{% endif %}
+{% endblock %}

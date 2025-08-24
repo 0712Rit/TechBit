@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ user.username }}'s Profile{% endblock %}
+{% block content %}
+<div class="hero">
+    <h1>{{ user.username }}'s Profile</h1>
+    <p>{{ user.bio or 'No bio yet.' }}</p>
+</div>
+<h3>Blogs by {{ user.username }}</h3>
+{% for blog in blogs.items %}
+    <div class="blog-card">
+        <h3><a href="{{ url_for('blog_view', blog_id=blog.id) }}">{{ blog.title }}</a></h3>
+        {% if blog.category %}<span class="category-badge">{{ blog.category.name }}</span>{% endif %}
+        <p>{{ blog.content|markdown|truncate(150, True) }}</p>
+    </div>
+{% else %}
+    <p>No blogs yet.</p>
+{% endfor %}
+<div>
+    {% if blogs.has_prev %}
+        <a href="{{ url_for('profile', username=user.username, page=blogs.prev_num) }}">Previous</a>
+    {% endif %}
+    {% if blogs.has_next %}
+        <a href="{{ url_for('profile', username=user.username, page=blogs.next_num) }}">Next</a>
+    {% endif %}
+</div>
+{% endblock %}

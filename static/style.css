@@ -1,0 +1,190 @@
+/* Base Typography & Layout */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f9f9f9;
+    color: #111;
+    margin: 0;
+    padding: 1rem;
+    line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+    color: #fff;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    animation: fadeIn 1s ease-in;
+}
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+.hero p {
+    font-size: 1.2rem;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+nav a {
+    color: #333;
+    text-decoration: none;
+    margin: 0 0.75rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+nav a:hover {
+    color: #007bff;
+}
+
+/* Dark Mode Toggle Button */
+.dark-toggle {
+    background: #e0e0e0;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.dark-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Flash Messages */
+.flash {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+    animation: slideIn 0.5s ease;
+}
+.flash.success { background-color: #d4edda; color: #155724; }
+.flash.danger  { background-color: #f8d7da; color: #721c24; }
+.flash.warning { background-color: #fff3cd; color: #856404; }
+.flash.info    { background-color: #d1ecf1; color: #0c5460; }
+
+/* Form Styling */
+form input[type="text"],
+form input[type="password"],
+form textarea {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: 10px auto;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 999px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+form input:focus, form textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+form textarea {
+    border-radius: 10px;
+    resize: vertical;
+    height: 200px;
+}
+input[type="submit"] {
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 999px;
+    transition: transform 0.2s;
+}
+input[type="submit"]:hover {
+    transform: scale(1.05);
+}
+
+/* Blog Card */
+.blog-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    margin: 1.25rem 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+.category-badge {
+    background: #007bff;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+}
+
+/* Headings */
+h2, h3, h4 {
+    color: #222;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Dark Mode Overrides */
+body.dark-mode {
+    background: #1a1a1a;
+    color: #eee;
+}
+body.dark-mode .hero {
+    background: linear-gradient(135deg, #004085, #0088cc);
+}
+body.dark-mode nav {
+    background: #121212;
+    border-bottom: 1px solid #333;
+}
+body.dark-mode .dark-toggle {
+    background: #333;
+    color: #eee;
+}
+body.dark-mode .blog-card {
+    background: #2a2a2a;
+    box-shadow: none;
+}
+body.dark-mode input,
+body.dark-mode textarea {
+    background: #333;
+    color: #eee;
+    border: 1px solid #555;
+}
+body.dark-mode input[type="submit"] {
+    background: linear-gradient(135deg, #004085, #0088cc);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 1.8rem; }
+    .hero p { font-size: 1rem; }
+    nav { flex-direction: column; gap: 1rem; }
+    .blog-card { padding: 1rem; }
+}

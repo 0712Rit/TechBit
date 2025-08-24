@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Your Dashboard</h2>
+<p>Welcome back, {{ username }}!</p>
+<a href="{{ url_for('create_blog') }}">Create New Blog</a>
+<h3>Your Blogs</h3>
+{% for blog in blogs.items %}
+    <div class="blog-card">
+        <h3><a href="{{ url_for('blog_view', blog_id=blog.id) }}">{{ blog.title }}</a></h3>
+        {% if blog.category %}<span class="category-badge">{{ blog.category.name }}</span>{% endif %}
+        <p>{{ blog.content|markdown|truncate(150, True) }}</p>
+        <a href="{{ url_for('edit_blog', blog_id=blog.id) }}">Edit</a> |
+        <a href="{{ url_for('delete_blog', blog_id=blog.id) }}">Delete</a>
+    </div>
+{% else %}
+    <p>You have not written any blogs yet.</p>
+{% endfor %}
+<div>
+    {% if blogs.has_prev %}
+        <a href="{{ url_for('dashboard', page=blogs.prev_num) }}">Previous</a>
+    {% endif %}
+    {% if blogs.has_next %}
+        <a href="{{ url_for('dashboard', page=blogs.next_num) }}">Next</a>
+    {% endif %}
+</div>
+{% endblock %}
